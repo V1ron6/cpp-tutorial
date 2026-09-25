@@ -1,0 +1,14 @@
+# compiled binaries — never commit build output
+*.out
+a.out
+helloworld/hello
+input/with
+input/without
+arithimetic/bscop
+arithimetic/cmarthimetic
+variables/vartype
+variables/valtypedef
+variables/valnamespace
+variables/varconst
+*.o
+*.exe
