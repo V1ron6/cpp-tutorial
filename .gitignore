@@ -1,6 +1,17 @@
-# compiled binaries — never commit build output
-*.out
+# compiled binaries — never commit build output.
+# BUG FIX: the old `*/*.out`, `*/*.o`, `*/*.exe` patterns only match ONE
+# folder deep (e.g. helloworld/hello.out), so they silently missed anything
+# under a nested folder like controlStructures/if/. `**/` matches at any
+# depth, which is what a repo with subfolders inside topic folders needs.
+**/*.out
+**/*.o
+**/*.exe
 a.out
+
+# extension-less compiled binaries that have been committed by accident
+# in past passes — kept as an explicit safety net alongside the patterns
+# above, since a fresh `g++ -o name file.cpp` (no extension) won't match
+# *.out/*.o/*.exe at all.
 helloworld/hello
 input/with
 input/without
@@ -10,8 +21,6 @@ variables/vartype
 variables/valtypedef
 variables/valnamespace
 variables/varconst
-*.o
-*.exe
-*/*.exe
-*/*.o
-*/*.out
+controlStructures/if/baseif
+controlStructures/if/baseifelse
+controlStructures/if/baseifelseif
