@@ -12,3 +12,6 @@ variables/valnamespace
 variables/varconst
 *.o
 *.exe
+*/*.exe
+*/*.o
+*/*.out
