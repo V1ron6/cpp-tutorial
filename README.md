@@ -14,7 +14,8 @@ into a real project.
 | `input/` | Reading from the user with `std::cin` / `std::getline` | [input-README.md](input/input-README.md) |
 | `arithimetic/` | Operators (`+ - * /`, `++`, `--`) and `<cmath>` | [arithimetic-README.md](arithimetic/arithimetic-README.md) |
 | `variables/` | Declaring, initializing, typing, `const`, namespaces, `typedef`/`using` | [variables-README.md](variables/variables-README.md) |
-| `controlStructures/` | Branching: `if`/`else`/`else if`, `switch`, ternary `?:` | [controlStructures-README.md](controlStructures/controlStructures-README.md) |
+| `controlStructures/` | Branching and looping: `if`/`else`/`else if`, `switch`, ternary `?:`, `for`, `while`/`do-while`, nested loops | [controlStructures-README.md](controlStructures/controlStructures-README.md) |
+| `milestones/` | Small projects combining several concepts at once (currently: a tic-tac-toe game, still in progress) | [milestones-README.md](milestones/milestones-README.md) |
 
 Each folder's own README lists every file in it, what it teaches, and any
 bug that was fixed in it — see below for the general kinds of fixes applied
@@ -83,6 +84,40 @@ inside its four folders.
   `std::cout` call, and commented on the difference.
 - `switch/switch.cpp`: no functional bug; normalized `#include<iostream>`
   spacing and a comment typo.
+
+## Pass 3: `controlStructures/{for,while,nestedloops}` + `milestones/`
+Two more loop-related subfolders were added under `controlStructures/`,
+plus a brand-new `milestones/` category containing a tic-tac-toe game.
+
+- **`for/forloop.cpp`**: `times` was declared `double` but computed as
+  plain `int` multiplication (`number * i`) before being assigned —
+  the `double` type didn't actually prevent the overflow it looked like
+  it was guarding against. Cast before multiplying instead.
+- **`while/do-while.cpp`**: `"try again!!!"` printed even when the guess
+  was correct, right before the success message. Now conditional on a
+  wrong guess.
+- **`nestedloops/nestedforloop.cpp`**: every row of the rectangle printed
+  one `*` too many (`"* \n"` instead of `"\n"` after the inner loop).
+- **`nestedloops/nestedwhileloop.cpp`**: used `srand`/`rand`/`time`
+  without `#include <cstdlib>`/`<ctime>` — same accidental-transitive-
+  include issue as earlier passes.
+- **`milestones/game/{ticgame,ticgameUpdate}.cpp`** (both files, same
+  bugs in each — full detail in `milestones/game/game-README.md`):
+  - Out-of-bounds board read (`board[posX][3]` on a 3x3 board).
+  - A real **segfault**, reproduced while testing: `std::cin >> position`
+    was never validated, so bad/exhausted input flowed straight into an
+    array index. Added a range + stream-state check.
+  - `|` used where `||` was meant (happened to work, wasn't correct).
+  - `ticgame.cpp` only: two variables read before being initialized
+    (undefined behavior), and an occupied board cell got silently
+    overwritten instead of rejected (already fixed in `ticgameUpdate.cpp`,
+    mirrored back).
+  - Several genuinely unfinished parts of the game (a turn that doesn't
+    actually retry on an invalid move, a dead input-validation branch,
+    two placeholder error messages) were left alone and documented as
+    known issues rather than redesigned, since the project's own
+    `.progess.txt` says it's still in progress.
+- Removed 2 more committed binaries (`tic2.1`, `tic2.2`).
 
 ## License
 AGPL-3.0 — see [LICENSE](LICENSE).

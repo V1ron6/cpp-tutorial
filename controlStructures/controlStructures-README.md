@@ -10,6 +10,9 @@ Three subfolders, three ways to branch:
 | `if/` | [if-README.md](if/if-README.md) | `if`, `if/else`, `if/else if/else` |
 | `switch/` | [switch-README.md](switch/switch-README.md) | `switch` — a menu-style alternative to a long `if/else if` chain |
 | `ternary/` | [ternary-README.md](ternary/ternary-README.md) | `?:` — the conditional *expression* |
+| `for/` | [for-README.md](for/for-README.md) | `for` — init/test/step in one line, for a known number of repeats |
+| `while/` | [while-README.md](while/while-README.md) | `while` (pretest) and `do-while` (post-test) loops |
+| `nestedloops/` | [nestedloops-README.md](nestedloops/nestedloops-README.md) | A loop inside a loop (`for` in `for`, `while` in `while`) |
 
 ## Build & run any file
 ```sh
