@@ -70,9 +70,9 @@ void checkWin(char player,char computer) {
         if(computer==player) {
             std::cout << "it's a tie" << std::endl;
         } else if(computer== 'r') {
-            std::cout << "you win" << std::endl;
+            std::cout << "Computer wins" << std::endl;
         } else {
-            std::cout<<"Computer wins"<<std::endl;
+            std::cout<<"You win"<<std::endl;
         };
         break;
     };
