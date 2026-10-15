@@ -1,3 +1,14 @@
+/*
+ * LESSON: Returning a value from a function
+ *
+ * What to learn: A return type describes the kind of value a function sends back. A returned string can be stored, printed, or passed to another function.
+ * Try it: Change the returned message and store the result in a variable before printing it.
+ * Check your understanding: How is returning a value different from printing inside the function?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <string>
 
@@ -9,7 +20,8 @@
 
     steps:
         declare a function
-        std::string functionname(){
+        // This function sends a string back to its caller with return.
+std::string functionname(){
           //action or code
           return string;
         }

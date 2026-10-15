@@ -1,3 +1,14 @@
+/*
+ * LESSON: Initializing variables
+ *
+ * What to learn: Initialization gives a variable its first value at the moment it is declared. Different types represent different kinds of data.
+ * Try it: Change the float and double values. Notice that 3.14f uses f to mark a float literal.
+ * Check your understanding: What could go wrong if a variable is used before it has a meaningful value?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <string>
 

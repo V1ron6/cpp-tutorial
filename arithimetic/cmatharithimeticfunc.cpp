@@ -1,3 +1,14 @@
+/*
+ * LESSON: Useful functions from <cmath>
+ *
+ * What to learn: The cmath library provides common mathematical operations. std::sqrt finds a square root, std::pow raises a value to a power, and floor/ceil round in opposite directions.
+ * Try it: Try sqrt(16), round(3.2), ceil(3.2), and floor(3.8).
+ * Check your understanding: Why should the result be stored in double when it may contain a fraction?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <cmath>
 
@@ -24,6 +35,7 @@ int main() {
     z = std::pow(x, y);
     std::cout << "pow : " << z << std::endl;
 
+    // sqrt(3) is approximately 1.732; double preserves the fractional part.
     z = std::sqrt(x);
     std::cout << "sqr : " << z << std::endl;
 

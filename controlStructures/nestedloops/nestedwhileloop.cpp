@@ -1,3 +1,14 @@
+/*
+ * LESSON: Nested loops and a guessing game
+ *
+ * What to learn: The outer loop keeps the game running; the inner loop asks for a name until it is not empty. A random number is selected for the guessing challenge.
+ * Try it: Add a hint for guesses that are too high or too low. Validate that the input is a number from 1 to 10.
+ * Check your understanding: Why does the program use two different loop conditions?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <string>
 #include <cstdlib>   // BUG FIX: srand()/rand() need this -- it only compiled
@@ -17,6 +28,7 @@ int main() {
       }
     */
 
+    // Seed the pseudo-random generator so runs are not always identical.
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
     std::string name;
     bool game = true;
@@ -24,6 +36,7 @@ int main() {
     int number;
 
     std::cout << " let's play a game \n";
+    // The outer loop repeats until a correct guess ends the game.
     while (game) {
         while (name.empty()) {
             std::cout << "what is your name ";

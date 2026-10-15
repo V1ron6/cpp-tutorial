@@ -1,3 +1,14 @@
+/*
+ * LESSON: The conditional operator
+ *
+ * What to learn: The ternary expression `condition ? value_if_true : value_if_false` chooses one of two values. It is best when the choice is short; use if/else for more complex actions.
+ * Try it: Use a ternary expression to choose a label such as "adult" or "minor", then print the selected label.
+ * Check your understanding: What value does the expression produce?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 /*
@@ -8,6 +19,7 @@
   eg: condition ? valueIfTrue : valueIfFalse;
 */
 
+// Keep the ternary choice small: it produces one of two values.
 int main() {
     int age;
 

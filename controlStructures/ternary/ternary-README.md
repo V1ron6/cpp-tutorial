@@ -1,22 +1,21 @@
-# ternary
+# Mini-lesson: The Ternary Operator
 
-The conditional operator `?:` — C++'s only ternary (three-operand) operator,
-and the closest thing it has to an inline `if/else`.
+## The idea
 
-| File | What it demonstrates |
-|---|---|
-| `ternary.cpp` | `condition ? a : b`, shown two ways: once picking between two whole statements (works, but is a style smell), and once picking between two *values* passed to a single `std::cout` (the idiomatic form). |
+The conditional (ternary) operator is a compact way to choose one of two expressions. Its shape is `condition ? resultIfTrue : resultIfFalse`.
 
-## Build & run
-```sh
-g++ -std=c++17 -Wall -Wextra -o ternary ternary.cpp && ./ternary
-```
+For example, `age >= 18 ? "adult" : "minor"` chooses one of two text values. The condition is evaluated first; only the selected result is used. The operator produces a value, so it can be assigned to a variable or printed.
 
-## Notes
-- A ternary is an **expression** — it produces a value. The original file
-  used it to pick between two entire `std::cout << ... << std::endl`
-  statements. That compiles (because `<<` returns the stream, so both
-  branches are the same type), but it's using an expression as if it were
-  an `if/else` statement. Added a second line showing the idiomatic form:
-  `std::cout << (age >= 18 ? "Welcome" : "Go home") << std::endl;` — one
-  `cout` call, the ternary only chooses the string.
+## When should it be used?
+
+Use ternary for a small, readable choice. If the logic becomes long or either branch needs multiple statements, use `if/else`. Shorter code is not automatically clearer code.
+
+Open `ternary.cpp` and identify the condition, the result for `true`, and the result for `false`.
+
+## Practice
+
+1. Change the condition and predict the selected result.
+2. Store the ternary result in a variable before printing it.
+3. Rewrite a simple ternary expression as `if/else`, then compare which version is easier to read.
+
+**Challenge:** Choose the larger of two numbers using a ternary expression. Then write the same logic with `if/else` and explain when you would prefer each version.

@@ -1,3 +1,14 @@
+/*
+ * LESSON: Choosing between two paths
+ *
+ * What to learn: if and else form a two-way decision: one branch runs when the condition is true, the other when it is false. getline lets the name contain spaces.
+ * Try it: Test one age on each side of the boundary. Decide whether the rule should use < or <= for your intended policy.
+ * Check your understanding: Can both branches run during one execution of this if/else?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <string>
 

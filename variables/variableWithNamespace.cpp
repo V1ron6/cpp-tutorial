@@ -1,3 +1,14 @@
+/*
+ * LESSON: Namespaces prevent naming collisions
+ *
+ * What to learn: A namespace groups names under a label. The scope operator :: selects which name you mean, such as first::x.
+ * Try it: Add a third namespace containing its own x, then print it.
+ * Check your understanding: How does the compiler distinguish first::x from second::x?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 /*
@@ -5,6 +16,7 @@
  value depending on the context/purpose it belongs to.
 */
 
+// The namespace name qualifies x, allowing another namespace to also define x.
 namespace first {
     int x = 1;
 }

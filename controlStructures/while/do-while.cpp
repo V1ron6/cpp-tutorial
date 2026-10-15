@@ -1,3 +1,14 @@
+/*
+ * LESSON: A do-while loop runs at least once
+ *
+ * What to learn: Unlike while, do-while checks its condition after executing the body. This makes it useful for menus or prompts that must appear at least once.
+ * Try it: Make the condition false on the first check and observe that the body still ran once.
+ * Check your understanding: How does its execution order differ from while?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 int main() {
@@ -12,6 +23,7 @@ int main() {
     */
 
     int number;
+    // A do-while loop executes this body once before checking its condition.
     do {
         std::cout << "guess a number between 1-10 \n";
         std::cin >> number;

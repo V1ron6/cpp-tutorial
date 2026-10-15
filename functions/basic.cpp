@@ -1,3 +1,14 @@
+/*
+ * LESSON: Creating and calling a function
+ *
+ * What to learn: A function names a reusable task. Defining a function describes what it does; calling it runs its body.
+ * Try it: Call the function twice and change its message.
+ * Check your understanding: Why might a function be preferable to copying the same lines repeatedly?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 /*
@@ -23,10 +34,12 @@
 
 */
 
+// `void` means this function performs an action but does not return a value.
 void greet() {
     std::cout << "hello world" << std::endl;
 };
 
+// main() calls the helper function; defining greet alone would not run it.
 int main() {
     /*
     let's say we want to print the word hello world

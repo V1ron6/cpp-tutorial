@@ -1,3 +1,14 @@
+/*
+ * LESSON: Selecting an option with switch
+ *
+ * What to learn: switch compares one expression against fixed case labels. break exits the switch so execution does not continue into the next case. default handles values that match no case.
+ * Try it: Add a case for a special input only if you can give it a sensible meaning; also test 0 and 8.
+ * Check your understanding: What might happen if break were removed from a case?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 /*
@@ -32,6 +43,7 @@ int main() {
     std::cout << "enter a number from (1-7)" << std::endl;
     std::cin >> day;
 
+    // Only the case matching day is entered. Each break prevents fall-through.
     switch (day) {
         case 1:
             std::cout << "Sunday" << std::endl;

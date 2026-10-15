@@ -1,3 +1,14 @@
+/*
+ * LESSON: Milestone: a second tic-tac-toe design
+ *
+ * What to learn: This version separates player identity from the X/O symbol using helper functions. Compare it with ticgame.cpp and notice that both can solve the same problem with slightly different structure.
+ * Try it: Follow one turn from Move() through checkWin(), then into switchPlayer().
+ * Check your understanding: What does each helper function make easier to understand?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -6,6 +17,7 @@
 // iteration while making turns, input validation, wins, draws, and replay work.
 using str_t = std::string;
 
+// Render the current board without changing its game state.
 void displayBoard(const char board[3][3]) {
     std::cout << '\n';
     for (int row = 0; row < 3; ++row) {
@@ -16,6 +28,7 @@ void displayBoard(const char board[3][3]) {
     std::cout << '\n';
 }
 
+// Check each row, each column, and the two diagonals for a winning sign.
 bool checkWin(const char board[3][3], char sign) {
     for (int i = 0; i < 3; ++i) {
         if ((board[i][0] == sign && board[i][1] == sign && board[i][2] == sign) ||
@@ -25,6 +38,7 @@ bool checkWin(const char board[3][3], char sign) {
            (board[0][2] == sign && board[1][1] == sign && board[2][0] == sign);
 }
 
+// Convert player one to player two and vice versa.
 char switchPlayer(char currentPlayer) {
     return currentPlayer == '1' ? '2' : '1';
 }
@@ -33,6 +47,7 @@ char signassign(char currentPlayer) {
     return currentPlayer == '1' ? 'X' : 'O';
 }
 
+// Validate the selected position before changing a board cell.
 bool Move(char board[3][3], char currentPlayer) {
     const char sign = signassign(currentPlayer);
     while (true) {
@@ -61,6 +76,7 @@ bool Move(char board[3][3], char currentPlayer) {
     }
 }
 
+// Initialize the board with the selectable labels 1 through 9.
 void newgame(char board[3][3]) {
     char value = '1';
     for (int row = 0; row < 3; ++row)
@@ -68,6 +84,7 @@ void newgame(char board[3][3]) {
             board[row][col] = value++;
 }
 
+// main coordinates rounds, turns, and the final win/draw decision.
 int main() {
     char board[3][3];
     bool playAgain = true;

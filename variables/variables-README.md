@@ -1,38 +1,56 @@
-# variables
+# Lesson 3: Variables, Types, and Constants
 
-Declaring, initializing, and typing data. Corresponds to Chapters 2
-("Variables"), 3 ("Literals and Constants"), and 16 ("The Preprocessor",
-for `typedef`) of *The Rook's Guide to C++*.
+## The idea
 
-| File | What it demonstrates |
+A variable is a named place for a value. Its type tells C++ what kind of value it stores and which operations make sense for it. A good variable name helps a reader understand the program without guessing.
+
+## Explore the examples
+
+| File | Read it to learn |
 |---|---|
-| `variables1.cpp` | Declaring `int`, `char`, `double`, `bool`, and `std::string` variables, initialized at declaration, one block per type. |
-| `variableAssigbed.cpp` | The same idea, more compact: `int`, `string`, `float`, `double` all assigned at declaration in one function. (Filename keeps the source repo's original spelling — "Assigbed" — rather than being silently renamed.) |
-| `variableCONST.cpp` | `const double` used for a value that must never change (`PI`), computing a circle's circumference. |
-| `variableDeclaredConstant.cpp` | A second `const` example (circle area *and* perimeter from a `const float pi`), showing the same pattern applied to a slightly bigger calculation. |
-| `variableWithNamespace.cpp` | Two namespaces (`first`, `second`) each defining their own `x`, plus a plain global `x`, to show that a namespace scopes a name so the same identifier can mean different things in different contexts. |
-| `valtypedef.cpp` | `typedef std::string str_t;` and modern `using number = int;` — two ways to alias a type for readability. |
+| `variables1.cpp` | Common types: `int`, `char`, `double`, `bool`, and `std::string` |
+| `variableAssigbed.cpp` | Declaring and initializing several variables |
+| `variableCONST.cpp` | A constant used in a circle calculation |
+| `variableDeclaredConstant.cpp` | Reusing a constant in more than one calculation |
+| `variableWithNamespace.cpp` | How namespaces keep same-named identifiers separate |
+| `valtypedef.cpp` | Type aliases using `typedef` and `using` |
 
-## Build & run
+## The types in everyday language
+
+- `int`: whole numbers such as `7` or `-2`.
+- `double`: numbers that can have a fractional part, such as `3.14`.
+- `char`: one character, written with single quotes, such as `'A'`.
+- `bool`: either `true` or `false`.
+- `std::string`: text, usually written in double quotes.
+
+For example, `int score = 10;` declares an integer named `score` and initializes it to `10`. `const double pi = 3.14159;` declares a value that cannot be reassigned after initialization. Prefer `const` when a value should remain fixed.
+
+## Names and scope
+
+A namespace groups names so that two values can share a name without being confused. In `variableWithNamespace.cpp`, compare the qualified names such as `first::x` and `second::x`. The `::` operator identifies the scope where a name belongs. Type aliases such as `using str_t = std::string;` create an alternate name for a type; they do not create a new kind of string.
+
+## Run and investigate
+
 ```sh
-g++ -std=c++17 -Wall -Wextra -o variables1 variables1.cpp && ./variables1
+g++ -std=c++17 -Wall -Wextra -Wpedantic -o vars variables/variables1.cpp
+./vars
 ```
-(swap the filename for any other file in this folder)
 
-## Bugs fixed
-- **`variables1.cpp`**: `poweredon` was declared but never printed — a dead
-  variable that undercut the file's own point (showing every declared
-  boolean). Added its output line; renamed to `isFree`/`poweredOn` (camelCase,
-  consistent with the rest of the file) and away from `free`, which shadows
-  `std::free()` from `<cstdlib>`.
-- **`variableAssigbed.cpp`**, **`variableDeclaredConstant.cpp`**: both used
-  `using namespace std;`. Replaced with explicit `std::` prefixes so every
-  file in the tutorial follows one consistent, and generally recommended,
-  convention (a `using namespace std;` at file scope pulls the entire
-  standard library into scope and can silently collide with your own names).
-- **`variableAssigbed.cpp`**: typo `"a word sting"` → `"a word string"`.
-- **`valtypedef.cpp`**: `typedef std::string str_t;` used without
-  `#include <string>` (same accidental-transitive-include issue as the
-  `input` files). Also, the file's comment *talked about* `using number = int;`
-  but never actually used it — added a real `age` variable of type `number`
-  so the concept the comment describes is demonstrated, not just narrated.
+Repeat with each filename. Before running, predict the output. Then change a value and observe which output changes.
+
+## Practice
+
+1. Declare a variable for a player's name, score, and whether the player is active.
+2. Calculate a circle's circumference and area using a constant for pi.
+3. Change a `double` to an `int`. What happens to the fractional part, and why might that matter?
+4. In the namespace example, explain why `first::x` and `second::x` can be different values.
+
+**Challenge:** Create a tiny profile program that stores a name, age, and a constant for the number of days in a week, then prints a neatly formatted summary.
+
+## Read the source as a data story
+
+Start with `variables1.cpp`. Each declaration follows the pattern `type name = value;`. The type tells C++ what kind of value is stored; the name lets the rest of the program refer to it. The output statements then read those named values and display them.
+
+Next compare the constant examples. `const` means a value cannot be reassigned after initialization. In `variableWithNamespace.cpp`, `first::x` and `second::x` refer to different variables because the namespace is part of each name. In `valtypedef.cpp`, `str_t` and `number` are aliases: they make declarations shorter but do not create new underlying types.
+
+**Practice:** Add an `int` for a quantity, a `double` for a price, and a `const` value for a tax rate. Print them with labels that explain what each value means.

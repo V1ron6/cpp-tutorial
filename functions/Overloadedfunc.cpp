@@ -1,3 +1,14 @@
+/*
+ * LESSON: Function overloading
+ *
+ * What to learn: Overloaded functions share a name but have different parameter lists. The compiler chooses the version that matches the arguments in the call.
+ * Try it: Add a version that accepts three integers, using a distinct parameter list.
+ * Check your understanding: Why can’t two overloads differ only by return type?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <string>
 
@@ -51,6 +62,7 @@ void greet(str_t name,int age) {
 
 };
 
+// The compiler selects an overload based on the argument types and count.
 int main() {
     /*
      there are different ways to handle a returned

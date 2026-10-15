@@ -1,3 +1,14 @@
+/*
+ * LESSON: Milestone: console banking practice
+ *
+ * What to learn: This project combines variables, selection, loops, input, and functions or helper logic into a menu-driven application. Treat it as a learning simulation, not a real banking system.
+ * Try it: Trace one deposit and one withdrawal manually. Test zero, negative, and too-large amounts.
+ * Check your understanding: Where should validation happen before the balance changes?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -70,6 +81,7 @@ void deposit() {
     std::cout << "Deposit successful.\n";
 }
 
+// Follow the menu loop first, then inspect each operation it dispatches.
 int main() {
     bool running = true;
     welcome();

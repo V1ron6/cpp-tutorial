@@ -1,3 +1,14 @@
+/*
+ * LESSON: Repeating work with a for loop
+ *
+ * What to learn: A for loop has three parts: initialization, continuation condition, and update. Here i starts at 1, continues through end, and increases by one each round.
+ * Try it: Print a table for 7 up to 12. What happens when end is 0?
+ * Check your understanding: Which part of the loop makes i increase?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 int main() {
@@ -19,6 +30,7 @@ int main() {
     std::cout << "enter the number to end on\n";
     std::cin >> end;
 
+    // Start i at 1; repeat while i <= end; add 1 after each iteration.
     for (int i = 1; i < (end + 1); i++) {
         // BUG FIX: `times` was declared `double` but computed as
         // `number * i`, an int multiplication performed BEFORE the

@@ -1,27 +1,35 @@
-# if
+# Mini-lesson: `if`, `else if`, and `else`
 
-The `if` statement and its `else` / `else if` extensions, built up one file
-at a time.
+## The idea
 
-| File | What it demonstrates |
-|---|---|
-| `basicIf.cpp` | A bare `if` with no `else` — nothing prints if the condition is false. |
-| `basic_if_else.cpp` | Adds `else`, so exactly one of two branches always runs. Also switches to `std::getline(std::cin >> std::ws, name)` so a full name (with a space) can be entered. |
-| `basic_if_elseif_else.cpp` | Chains `else if` for a three-way branch: `age <= 0`, `age <= 18`, otherwise. `else if` is checked only when the `if` above it was false — it's not a separate independent check. |
+A condition is a question that evaluates to `true` or `false`. `if` allows a program to take an action only when that question is true. `else` provides a fallback, while `else if` checks another condition when earlier conditions were false.
 
-## Build & run
+Read `basicIf.cpp`, `basic_if_else.cpp`, and `basic_if_elseif_else.cpp` in that order. Notice how each file adds another possible path.
+
+## Read a condition carefully
+
+- `age >= 18` means age is at least 18.
+- `score == 100` checks equality.
+- `score != 0` checks inequality.
+- `&&` means both conditions must be true; `||` means at least one must be true; `!` reverses a Boolean value.
+
+A common beginner mistake is writing `=` where `==` is intended. Assignment changes a value; equality asks whether two values are equal.
+
+## Try it
+
+Compile an example from the repository root:
+
 ```sh
-g++ -std=c++17 -Wall -Wextra -o basicIf basicIf.cpp && ./basicIf
+g++ -std=c++17 -Wall -Wextra -Wpedantic -o decision controlStructures/if/basic_if_else.cpp
+./decision
 ```
 
-## Bugs fixed
-- **All three files**: the message read "you cannot be **apart of** this
-  organization" — "apart" means *separate from*, the opposite of the
-  intended "a part of". Fixed the wording in all three.
-- **All three files**: `#include <vector>` was present but nothing in any
-  of these files uses a `std::vector`. Removed the dead include — a stray
-  include makes a reader wonder what they're missing.
-- **`basic_if_elseif_else.cpp`**: the block comment described the syntax as
-  `elseif(condition)` (one word). That's not valid C++ — it's two keywords,
-  `else if`. Left as a comment it would have taught the wrong syntax; fixed
-  to `else if(condition)`.
+Change the condition and test values on both sides of the boundary. If the rule is “18 or older,” test 17, 18, and 19 rather than testing only one age.
+
+## Practice
+
+1. Check whether a number is positive, negative, or zero.
+2. Classify a score into three ranges.
+3. Combine two conditions, such as “the user is logged in **and** the account is active.”
+
+**Challenge:** Ask for an age and explain the result for values below, equal to, and above 18. Consider what should happen if the user enters text instead of a number.

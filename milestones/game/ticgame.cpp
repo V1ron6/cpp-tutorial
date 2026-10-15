@@ -1,3 +1,14 @@
+/*
+ * LESSON: Milestone: build tic-tac-toe
+ *
+ * What to learn: This project combines a two-dimensional board, functions, loops, validation, and win/draw checks. Read the helper functions before trying to understand main.
+ * Try it: Trace one full game on paper. Then test an occupied square and a winning line.
+ * Check your understanding: Why is it useful to separate drawing the board from checking for a win?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -5,6 +16,7 @@
 // First complete version of the two-player tic-tac-toe exercise.
 using str_t = std::string;
 
+// Display responsibility: render the current 3-by-3 board.
 void displayBoard(const char board[3][3]) {
     std::cout << '\n';
     for (int row = 0; row < 3; ++row) {
@@ -15,6 +27,7 @@ void displayBoard(const char board[3][3]) {
     std::cout << '\n';
 }
 
+// Return true if this sign fills any row, column, or diagonal.
 bool checkWin(const char board[3][3], char sign) {
     for (int i = 0; i < 3; ++i) {
         if ((board[i][0] == sign && board[i][1] == sign && board[i][2] == sign) ||
@@ -26,6 +39,7 @@ bool checkWin(const char board[3][3], char sign) {
            (board[0][2] == sign && board[1][1] == sign && board[2][0] == sign);
 }
 
+// Ask repeatedly until the player gives a valid, unoccupied cell.
 bool makeMove(char board[3][3], const str_t& player, char sign) {
     while (true) {
         std::cout << player << " (" << sign << "), choose a free cell (1-9): ";
@@ -52,6 +66,7 @@ bool makeMove(char board[3][3], const str_t& player, char sign) {
     }
 }
 
+// Restore the board labels 1–9 before a new round.
 void resetBoard(char board[3][3]) {
     char value = '1';
     for (int row = 0; row < 3; ++row)
@@ -59,6 +74,7 @@ void resetBoard(char board[3][3]) {
             board[row][col] = value++;
 }
 
+// main coordinates the game; helper functions handle individual responsibilities.
 int main() {
     char board[3][3];
     bool playAgain = true;

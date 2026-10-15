@@ -1,3 +1,14 @@
+/*
+ * LESSON: Arithmetic operators
+ *
+ * What to learn: Arithmetic operators calculate values. += and ++ are shorter ways to update a variable; integer division discards the fractional part, so the example uses double for the quotient.
+ * Try it: Change the starting values and predict each result. Compare 9 / 2 with 9.0 / 2.
+ * Check your understanding: Why does the quotient need a floating-point type to preserve 4.5?
+ *
+ * Learning tip: Read the program once before running it. Predict what it will do,
+ * compile and run it, then explain any difference between your prediction and output.
+ */
+
 #include <iostream>
 
 // making use of +, -, *, and /
@@ -45,6 +56,7 @@ int main() {
     // immediately assigned the result BACK into the int, throwing the
     // fraction away again (9/2 became 4, not 4.5) -- the cast was pointless.
     // The fix: keep the result in a double all the way to output.
+    // Convert before division; otherwise integer division would discard the fraction.
     double quotient = static_cast<double>(division::students) / 2;
     std::cout << "students quotient " << quotient << std::endl;
 

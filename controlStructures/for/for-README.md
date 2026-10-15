@@ -1,23 +1,26 @@
-# for
+# Mini-lesson: The `for` Loop
 
-The `for` loop: initialize, test, and step, all in one line, when you know
-how many times you want to repeat something. Corresponds to Chapter 12
-("Loops") of *The Rook's Guide to C++*.
+## The idea
 
-| File | What it demonstrates |
-|---|---|
-| `forloop.cpp` | Prints a multiplication table from 1 up to a user-chosen end value: `for(int i = 1; i < end + 1; i++)`. |
+A `for` loop is often used when the number of repetitions is controlled by a counter. Its header has three parts: initialization, condition, and update.
 
-## Build & run
-```sh
-g++ -std=c++17 -Wall -Wextra -o forloop forloop.cpp && ./forloop
+```cpp
+for (int i = 1; i <= 5; ++i) {
+    std::cout << i << '\n';
+}
 ```
 
-## Bugs fixed
-- `times` was declared `double`, but computed as `number * i` — plain
-  `int` multiplication — before ever being assigned to the double. The
-  `double` declaration looked like it was guarding against overflow for
-  a large table, but it wasn't: the multiplication itself still happened
-  in `int` first. Fixed by casting `number` to `double` before the
-  multiply, so the arithmetic itself happens in double precision.
-- Removed an unused `#include <string>`.
+The counter starts at 1; the condition is checked; the body runs; then `++i` increments the counter before the next check. The loop stops when the condition becomes false. Read `forloop.cpp` and map its parts to this pattern.
+
+## Common mistakes
+
+Check whether the first value should be included (`<` versus `<=`), and make sure the update moves toward the stopping condition. An off-by-one error is when a loop runs one time too many or too few.
+
+## Practice
+
+1. Print the numbers 1 through 20.
+2. Print only even numbers from 2 through 20.
+3. Count down from 10 to 1.
+4. Predict how many times the body runs before executing each version.
+
+**Challenge:** Use a `for` loop to calculate the sum of integers from 1 to 100. Print the final total and explain why the accumulator must be initialized before the loop.
