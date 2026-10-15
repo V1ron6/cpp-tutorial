@@ -22,7 +22,7 @@ void greetAll(std::string names[] , const int SIZE){
     
     for (int I=0;I<SIZE;I++){
         
-        std::cout << names[I] << std::endl;
+        std::cout <<"Hello "<< names[I] << std::endl;
     
     }
 
