@@ -1,161 +1,116 @@
+#include <iomanip>
 #include <iostream>
-#include <vector>
+#include <limits>
 #include <string>
 
-
-typedef std::string str_t;
+using str_t = std::string;
 
 namespace balance_ns {
 double balance = 0.00;
 }
 
 namespace history_ns {
-str_t HList[20] = {"Account Created"};
+str_t HList[20] = {"Account created"};
 int history_count = 1;
 }
 
-void translist(const str_t list[20]) {
+void addHistory(const str_t& entry) {
+    if (history_ns::history_count < 20) {
+        history_ns::HList[history_ns::history_count++] = entry;
+    } else {
+        std::cout << "Transaction history is full; this transaction was not recorded.\n";
+    }
+}
+
+bool readAmount(double& amount) {
+    if (std::cin >> amount && amount > 0.0) return true;
+    if (std::cin.eof()) return false;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Enter a valid amount greater than zero.\n";
+    return false;
+}
+
+void translist() {
     std::cout << "\n----- Transaction History -----\n";
-    for (int i = 0; i < 20; i++) {
-        if (!list[i].empty()) {
-            std::cout << i << ": " << list[i] << std::endl;
-        }
+    for (int i = 0; i < history_ns::history_count; ++i) {
+        std::cout << (i + 1) << ". " << history_ns::HList[i] << '\n';
     }
     std::cout << "-------------------------------\n";
 }
 
 void welcome() {
-    std::cout << "==================\n";
-    std::cout << "    Black Box     \n";
-    std::cout << "==================\n";
-    
-    str_t item[7] = {
-        ". Balance",
-        ". Withdraw",
-        ". Deposit",
-        ". Transfer",
-        ". History",
-        ". Info",
-        ". Exit"
-    };
-
-    for (int i = 0; i < 7; i++) {
-        std::cout << i + 1 << item[i] << std::endl;
-    }
-    std::cout << "------------------\n";
+    std::cout << "==================\n"
+              << "    Black Box     \n"
+              << "==================\n"
+              << "1. Balance\n2. Withdraw\n3. Deposit\n4. Transfer\n"
+              << "5. History\n6. Info\n7. Exit\n"
+              << "------------------\n";
 }
 
-double withdraw(double balance, str_t history[20]) {
-    std::cout << "\n----- Withdrawal -----\n";
-    std::cout << "Enter Amount: GHC ";
-
-    double amount;
-    std::cin >> amount;
-
-    if (amount <= 0) {
-        std::cout << "Invalid amount!\n";
-    } else if (balance < amount) {
-        std::cout << "Insufficient funds!\n";
-    } else {
-        balance -= amount;
-        std::cout << "Successfully withdrew GHC " << amount << std::endl;
-
-        // Add to history if space permits
-        if (history_ns::history_count < 20) {
-            history[history_ns::history_count] = "Withdrawal: -GHC " + std::to_string(amount);
-            history_ns::history_count++;
-        }
+void withdraw() {
+    std::cout << "Enter amount to withdraw (GHC): ";
+    double amount = 0.0;
+    if (!readAmount(amount)) return;
+    if (amount > balance_ns::balance) {
+        std::cout << "Insufficient funds.\n";
+        return;
     }
-
-    return balance;
+    balance_ns::balance -= amount;
+    addHistory("Withdrawal: -GHC " + std::to_string(amount));
+    std::cout << "Withdrawal successful.\n";
 }
 
-double deposit(double balance, str_t history[20]) {
-    std::cout << "\n----- Deposit -----\n";
-    std::cout << "Enter Amount: GHC ";
-
-    double amount;
-    std::cin >> amount;
-
-    if (amount <= 0) {
-        std::cout << "Invalid amount!\n";
-    } else {
-        balance += amount;
-        std::cout << "Successfully deposited GHC " << amount << std::endl;
-
-        // Add to history if space permits
-        if (history_ns::history_count < 20) {
-            history[history_ns::history_count] = "Deposit: +GHC " + std::to_string(amount);
-            history_ns::history_count++;
-        }
-    }
-
-    return balance;
-}
-
-double transfer(double balance) {
-    std::cout << "\nTransfer feature is under development.\n";
-    return balance;
+void deposit() {
+    std::cout << "Enter amount to deposit (GHC): ";
+    double amount = 0.0;
+    if (!readAmount(amount)) return;
+    balance_ns::balance += amount;
+    addHistory("Deposit: +GHC " + std::to_string(amount));
+    std::cout << "Deposit successful.\n";
 }
 
 int main() {
-    
-
+    bool running = true;
     welcome();
-
-    double balance = balance_ns::balance;
-
-    // Properly copy history from namespace array
-    str_t history[20];
-    for (int i = 0; i < 20; i++) {
-        history[i] = history_ns::HList[i];
-    }
-
-    int option;
-    bool initiate = true;
-
-    while (initiate) {
-        std::cout << "\n> ";
-        std::cin >> option;
-
+    while (running) {
+        std::cout << "\nChoose an option (1-7): ";
+        int option = 0;
+        if (!(std::cin >> option)) {
+            if (std::cin.eof()) break;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Enter a number from 1 to 7.\n";
+            continue;
+        }
         switch (option) {
-        case 1:
-            std::cout << "Current Balance: GHC " << balance << std::endl;
-            break;
-
-        case 2:
-            balance = withdraw(balance, history);
-            std::cout << "Current Balance: GHC " << balance << std::endl;
-            break;
-
-        case 3:
-            balance = deposit(balance, history);
-            std::cout << "Current Balance: GHC " << balance << std::endl;
-            break;
-
-        case 4:
-            balance = transfer(balance);
-            break;
-
-        case 5:
-            translist(history);
-            break;
-
-        case 6:
-            std::cout << "\nBlack Box Banking System v1.0\n";
-            std::cout << "logged in as : viron " << std::endl;
-            break;
-
-        case 7:
-            std::cout << "Goodbye!\n";
-            initiate = false;
-            break;
-
-        default:
-            std::cout << "Invalid choice! Please select between 1 and 7.\n";
+            case 1:
+                std::cout << std::fixed << std::setprecision(2)
+                          << "Current balance: GHC " << balance_ns::balance << '\n';
+                break;
+            case 2:
+                withdraw();
+                break;
+            case 3:
+                deposit();
+                break;
+            case 4:
+                std::cout << "Transfer feature is under development.\n";
+                break;
+            case 5:
+                translist();
+                break;
+            case 6:
+                std::cout << "Black Box Banking System v1.0\n"
+                          << "Demo console application; no real account is connected.\n";
+                break;
+            case 7:
+                running = false;
+                std::cout << "Goodbye!\n";
+                break;
+            default:
+                std::cout << "Invalid choice. Select a number from 1 to 7.\n";
         }
     }
-
     return 0;
 }
-

@@ -1,123 +1,72 @@
-# cpp-tutorial
+# C++ Tutorial
 
-A small, hand-written collection of C++ example programs, one topic per
-folder, working through core language features in roughly the order used by
-*The Rook's Guide to C++*. Every file is self-contained, compiles cleanly
-with `-Wall -Wextra`, and is meant to be read, built, and run — not copied
-into a real project.
+A beginner-friendly collection of self-contained C++ examples, organized by the topics and folders already used in this repository. The examples progress from basic output and input through variables, arithmetic, functions, control structures, and small console projects.
 
-## Folders
+The goal is to learn by reading, compiling, changing, and running each example. These are learning exercises rather than production banking or game software.
 
-| Folder | Topic | README |
-|---|---|---|
-| `helloworld/` | The minimal C++ program: `main()`, `std::cout` | [helloworld-README.md](helloworld/helloworld-README.md) |
-| `input/` | Reading from the user with `std::cin` / `std::getline` | [input-README.md](input/input-README.md) |
-| `arithimetic/` | Operators (`+ - * /`, `++`, `--`) and `<cmath>` | [arithimetic-README.md](arithimetic/arithimetic-README.md) |
-| `variables/` | Declaring, initializing, typing, `const`, namespaces, `typedef`/`using` | [variables-README.md](variables/variables-README.md) |
-| `controlStructures/` | Branching and looping: `if`/`else`/`else if`, `switch`, ternary `?:`, `for`, `while`/`do-while`, nested loops | [controlStructures-README.md](controlStructures/controlStructures-README.md) |
-| `milestones/` | Small projects combining several concepts at once (currently: a tic-tac-toe game, still in progress) | [milestones-README.md](milestones/milestones-README.md) |
+## Learning path
 
-Each folder's own README lists every file in it, what it teaches, and any
-bug that was fixed in it — see below for the general kinds of fixes applied
-across the whole repo.
+| Order | Folder | Topics | Guide |
+|---:|---|---|---|
+| 1 | `helloworld/` | `main`, headers, console output | [Hello World guide](helloworld/helloworld-README.md) |
+| 2 | `input/` | `std::cin`, `std::getline`, whitespace | [Input guide](input/input-README.md) |
+| 3 | `variables/` | Types, initialization, constants, namespaces, aliases | [Variables guide](variables/variables-README.md) |
+| 4 | `arithimetic/` | Arithmetic operators and `<cmath>` | [Arithmetic guide](arithimetic/arithimetic-README.md) |
+| 5 | `controlStructures/` | Conditions, `switch`, ternary, loops, nested loops | [Control structures guide](controlStructures/controlStructures-README.md) |
+| 6 | `functions/` | Function calls, parameters, return values, overloading | [Functions guide](functions/functions-README.md) |
+| 7 | `milestones/` | Practice projects: tic-tac-toe and a console banking simulation | [Milestones guide](milestones/milestones-README.md) |
 
-## Build & run any file
+## Requirements
+
+- A C++ compiler such as GCC (`g++`) or Clang.
+- A terminal or command prompt.
+- Basic familiarity with navigating folders.
+
+Check that a compiler is installed with `g++ --version`.
+
+## Compile and run an example
+
+Run the commands from the repository root. Replace the paths and output name with the example you want to try.
+
 ```sh
-g++ -std=c++17 -Wall -Wextra -o <name> <folder>/<file>.cpp
-./<name>
+g++ -std=c++17 -Wall -Wextra -Wpedantic -o hello helloworld/hello.cpp
+./hello
 ```
-No file depends on another, so each one builds and runs on its own.
 
-## What changed in this pass
-This repo previously had compiled ARM64 binaries checked in alongside the
-source (`hello`, `a.out`, `with`, `without`, `bscop`, `cmarthimetic`,
-`varconst`, `valtypedef`, `valnamespace`, `vartype`). Those were removed and
-a `.gitignore` was added so build output stops getting committed by
-accident — they're not source, they don't belong in version control, and
-they made the repo look bigger and more cluttered than the ~12 files it
-actually is.
+On Windows, run the generated program as `hello.exe`. Every `.cpp` file is intended to be compiled independently; do not compile all examples into one executable because many contain their own `main()` function.
 
-Beyond that, three kinds of real bugs were fixed across the source files
-(details are in each folder's own README):
+## Practice projects
 
-1. **Missing `#include <string>`** in three files that use `std::string`
-   through a `typedef` — they only compiled because another header
-   transitively pulled it in, which isn't something to rely on.
-2. **Silent precision loss** in `cmatharithimeticfunc.cpp` — `<cmath>`
-   functions return `double`, but results were stored in `int`, quietly
-   truncating `sqrt(3)` from `1.73205` to `1`.
-3. **A cast that did nothing** in `basicOperators.cpp` — a `double` cast
-   was thrown away by immediately reassigning the result back into an
-   `int`, defeating the point of the example.
+```sh
+g++ -std=c++17 -Wall -Wextra -Wpedantic -o ticgame milestones/game/ticgame.cpp
+./ticgame
 
-Plus smaller consistency fixes: unqualified `<cmath>` calls given explicit
-`std::` prefixes, `using namespace std;` replaced with explicit `std::`
-throughout (one convention, everywhere), a namespace named `div` renamed
-(it collided with `std::div()`), a variable named `free` renamed (it
-shadowed `std::free()`), a declared-but-never-printed variable given its
-missing output line, and a few comment/string typos. No topic or file was
-added beyond what the original four folders already covered.
+g++ -std=c++17 -Wall -Wextra -Wpedantic -o bankapp milestones/bank/bankapp.cpp
+./bankapp
+```
 
-## Pass 2: `controlStructures/`
-A new category was added upstream (`controlStructures/if`, `.../switch`,
-`.../ternary`) — the fixes below stayed inside it, same as pass 1 stayed
-inside its four folders.
+The banking program is a local learning simulation. It does not connect to a real account, persist data, or implement transfers.
 
-- Removed 3 more committed ARM64 binaries (`baseif`, `baseifelse`,
-  `baseifelseif`), and fixed `.gitignore` itself: its `*/*.out`-style
-  patterns only match one folder deep, so they silently missed anything
-  under a nested folder like `controlStructures/if/`. Switched to `**/*.out`
-  (matches any depth) and kept an explicit list of extension-less binaries
-  as a safety net, since a binary compiled without `.out`/`.exe`/`.o`
-  matches no wildcard pattern at all.
-- **`if/basicIf.cpp`, `if/basic_if_else.cpp`, `if/basic_if_elseif_else.cpp`**:
-  fixed "you cannot be **apart of** this organization" → "a part of" —
-  "apart" means separate/away, the opposite of what the sentence intended.
-- Removed an unused `#include <vector>` from all three `if/` files —
-  nothing in them touches a `std::vector`.
-- **`if/basic_if_elseif_else.cpp`**: its own doc comment showed the syntax
-  as `elseif(condition)` (one word, not valid C++) — fixed to `else if`.
-- **`ternary/ternary.cpp`**: the original used the ternary to select between
-  two entire `std::cout` *statements* — legal (both branches are the same
-  stream type) but not what a ternary is for. Added a second line showing
-  the idiomatic form, where the ternary picks a *value* passed to one
-  `std::cout` call, and commented on the difference.
-- `switch/switch.cpp`: no functional bug; normalized `#include<iostream>`
-  spacing and a comment typo.
+## Learning workflow
 
-## Pass 3: `controlStructures/{for,while,nestedloops}` + `milestones/`
-Two more loop-related subfolders were added under `controlStructures/`,
-plus a brand-new `milestones/` category containing a tic-tac-toe game.
+1. Open the topic's README before the source file.
+2. Compile and run the example unchanged.
+3. Predict what a small change will do, then try it.
+4. Test ordinary input and edge cases, including invalid input where relevant.
+5. Read compiler warnings instead of ignoring them.
 
-- **`for/forloop.cpp`**: `times` was declared `double` but computed as
-  plain `int` multiplication (`number * i`) before being assigned —
-  the `double` type didn't actually prevent the overflow it looked like
-  it was guarding against. Cast before multiplying instead.
-- **`while/do-while.cpp`**: `"try again!!!"` printed even when the guess
-  was correct, right before the success message. Now conditional on a
-  wrong guess.
-- **`nestedloops/nestedforloop.cpp`**: every row of the rectangle printed
-  one `*` too many (`"* \n"` instead of `"\n"` after the inner loop).
-- **`nestedloops/nestedwhileloop.cpp`**: used `srand`/`rand`/`time`
-  without `#include <cstdlib>`/`<ctime>` — same accidental-transitive-
-  include issue as earlier passes.
-- **`milestones/game/{ticgame,ticgameUpdate}.cpp`** (both files, same
-  bugs in each — full detail in `milestones/game/game-README.md`):
-  - Out-of-bounds board read (`board[posX][3]` on a 3x3 board).
-  - A real **segfault**, reproduced while testing: `std::cin >> position`
-    was never validated, so bad/exhausted input flowed straight into an
-    array index. Added a range + stream-state check.
-  - `|` used where `||` was meant (happened to work, wasn't correct).
-  - `ticgame.cpp` only: two variables read before being initialized
-    (undefined behavior), and an occupied board cell got silently
-    overwritten instead of rejected (already fixed in `ticgameUpdate.cpp`,
-    mirrored back).
-  - Several genuinely unfinished parts of the game (a turn that doesn't
-    actually retry on an invalid move, a dead input-validation branch,
-    two placeholder error messages) were left alone and documented as
-    known issues rather than redesigned, since the project's own
-    `.progess.txt` says it's still in progress.
-- Removed 2 more committed binaries (`tic2.1`, `tic2.2`).
+## Repository conventions
+
+- Keep new examples inside the existing topic folders; do not create unrelated topics.
+- Keep examples self-contained and beginner-readable.
+- Include the standard headers actually used by each file and prefer explicit `std::` names.
+- Update the relevant README whenever an example changes.
+- Build outputs should not be committed; see [`.gitignore`](.gitignore).
+
+## Recent maintenance
+
+The examples and their guides have been reviewed for compile warnings, unsafe input handling, misleading comments, unused headers, and documentation gaps. Both tic-tac-toe versions now handle turns, occupied cells, invalid input, wins, draws, and replay. The banking exercise now validates menu and amount input and records transactions within its fixed history capacity. See each topic README for details.
 
 ## License
-AGPL-3.0 — see [LICENSE](LICENSE).
+
+AGPL-3.0. See [LICENSE](LICENSE).

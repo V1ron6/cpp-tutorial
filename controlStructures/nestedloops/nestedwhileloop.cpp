@@ -17,10 +17,10 @@ int main() {
       }
     */
 
-    srand(time(NULL));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     std::string name;
     bool game = true;
-    int guess = (rand() % 10 + 1);
+    int guess = (std::rand() % 10 + 1);
     int number;
 
     std::cout << " let's play a game \n";

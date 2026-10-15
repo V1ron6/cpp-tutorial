@@ -1,2 +1,1 @@
-still under development
-i have fixed the assign and seesion chsnger
+Completed maintenance note: the tic-tac-toe examples now validate input, reject occupied cells, alternate turns, detect wins and draws, and support replay. The original progress note is retained here as a record of the project's development.

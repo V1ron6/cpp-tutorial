@@ -7,7 +7,7 @@ a condition is no longer met. Corresponds to Chapter 12 ("Loops") of
 | File | What it demonstrates |
 |---|---|
 | `while.cpp` | A pretest loop that keeps asking for a name until `std::getline` actually returns a non-empty one. |
-| `do-while.cpp` | A post-test loop: the body always runs at least once before the condition (`number != 7`) is checked — a number-guessing loop. |
+| `do-while.cpp` | A post-test loop: the body runs at least once before the condition (`number != 7`) is checked — a number-guessing loop. |
 
 ## Build & run
 ```sh

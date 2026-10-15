@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <string>
 
 /*
@@ -47,7 +46,7 @@ void greet(str_t name) {
 
 
 void greet(str_t name,int age) {
-    std::cout<<"hello "<<name<<" you are " <<age<<"years old!\n";
+    std::cout<<"hello "<<name<<" you are " <<age<<" years old!\n";
 
 
 };
@@ -61,7 +60,7 @@ int main() {
     std::cout<<"all have the same function name  \n";
 
     std::cout<<"\n first function without parameters\n";
-    greet();
+    std::cout << greet() << "\n";
 
     std::cout<<"\nsecond function with a parameters\n";
     greet("V1ron6");
